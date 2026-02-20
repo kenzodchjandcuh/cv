@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $telp = $_POST['phone'] ?? '';
     $pesan = $_POST['message'] ?? '';
-    $option = $_POST['option'] ?? 'auto';
 
     // 2. Validasi sederhana (pastikan tidak kosong)
     if (empty($nama) || empty($email) || empty($telp) || empty($pesan)) {
@@ -23,12 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   "📞 No. Telp: $telp\n\n" .
                   "💬 Pesan:\n\"$pesan\"";
 
-    // 4. Tentukan target berdasarkan pilihan
-    if ($option === 'developer') {
-        $target = '082216460833'; // Nomor pengembang (ganti jika berbeda)
-    } else {
-        $target = '082216460833'; // Kirim otomatis ke nomor default
-    }
+    // 4. Kirim data ke API Fonnte
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -41,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => array(
-    'target' => $target,
+    'target' => '082216460833',
     'message' => $isiPesanWA, 
     'countryCode' => '62', //optional
     ),
